@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <div class="intro-container light-text">
+        <h1>To-do list</h1>
+    </div>
+    <form class="flex to-do-form" action="/to-dos" method="POST">
+        <input type="text" name="action" placeholder="action">
+        <input type="date" name="date" placeholder="do-by">
+        <button type="submit">Submit</button>
+    </form>
+    <ul class="todos">
+        <% for(let i = 0; i < todos.length; i++){ %>
+            <li class="to-do-text">
+                <span><%= todos[i].action %></span>
+                <span><%= todos[i].date %></span>
+                <span class="trash-can">🗑️</span>
+                <button type="button" id="complete-button">Complete</button>
+            </li>
+        <% } %>
+    </ul>
+
+    <script src="/public/main.js"></script>
+</body>
+</html>

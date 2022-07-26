@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+.dark-text{
+    color: #011638;
+}
+
+.light-text{
+    color: #d499b9;
+}
+
+.flex{
+    display: flex;
+}
+
+body{
+    background-color: #9055A2;
+}
+
+.intro-container{
+    text-align: center;
+}
+
+.to-do-form{
+    justify-content: space-around;
+}
