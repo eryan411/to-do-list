@@ -1,59 +1,50 @@
-const update = document.querySelector('#complete-button')
-const deleteText = document.querySelector('.trash-can')
-let today = new Date();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-let yyyy = today.getFullYear();
+const deleteBtn = document.querySelectorAll('.trash-can');
+const itemCompleted = document.querySelectorAll('#complete-button');
 
-today = `${mm}/${dd}/${yyyy}`
-
-Array.from(update).forEach((element)=>{
+Array.from(deleteBtn).forEach((element)=>{
     element.addEventListener('click', deleteTask)
 })
 
-Array.from(deleteText).forEach((element)=>{
-    element.addEventListener('click', completeTodo)
+Array.from(itemCompleted).forEach((element)=>{
+    element.addEventListener('click', markComplete)
 })
 
 async function deleteTask(){
-    console.log('test')
-    const action = this.parentNode.childNodes[1].innerText
-    const date = this.parentNode.childNodes[3].innerText
+    const itemText = this.parentNode.childNodes[1].innerText
     try{
-        const response = await fetch('deleteTask', {
+        const response = await fetch('delete', {
             method: 'delete',
-            headers: {'Content-Type' : 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                'action': action,
-                'date': date
+              'itemFromJS': itemText
             })
-        })
+          })
         const data = await response.json()
         console.log(data)
         location.reload()
-    } catch (err){
+
+    }catch(err){
         console.log(err)
     }
 }
 
-async function completeTodo(){
-    console.log('test')
-    const action = this.parentNode.childNodes[1].innerText
-    const date = this.parentNode.childNodes[3].innerText
+async function markComplete(){
+    const itemText = this.parentNode.childNodes[1].innerText
+    const dateText = this.parentNode.childNodes[3].innerText
+    console.log(itemText)
     try{
-        const response = await fetch('/to-dos', {
+        const response = await fetch('markComplete', {
             method: 'put',
-            headers: {'Content-type' : 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                'action': 'Done!',
-                'date': today
+                'itemFromJS': itemText
             })
-        })
+          })
         const data = await response.json()
         console.log(data)
         location.reload()
-    }
-    catch(err){
+
+    }catch(err){
         console.log(err)
     }
 }

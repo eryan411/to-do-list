@@ -16,17 +16,23 @@
         <input type="date" name="date" placeholder="do-by">
         <button type="submit">Submit</button>
     </form>
+    <p>Items Left: <%= left %></p>
     <ul class="todos">
         <% for(let i = 0; i < todos.length; i++){ %>
             <li class="to-do-text">
-                <span><%= todos[i].action %></span>
-                <span><%= todos[i].date %></span>
+                <% if(todos[i].completed === true){ %>
+                    <span class="light-text"><%= todos[i].action %></span>
+                    <span class="light-text"><%= todos[i].date %></span>
+                <% } else { %>
+                    <span><%= todos[i].action %></span>
+                    <span><%= todos[i].date %></span>
+                <% } %>
                 <span class="trash-can">🗑️</span>
                 <button type="button" id="complete-button">Complete</button>
             </li>
         <% } %>
     </ul>
 
-    <script src="/public/main.js"></script>
+    <script src="/main.js"></script>
 </body>
 </html>
